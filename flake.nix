@@ -6,11 +6,23 @@
     devshell.url = "github:numtide/devshell/master";
   };
 
-  outputs = { self, nixpkgs, flake-utils, devshell }: {
+  outputs = { self, nixpkgs, flake-utils, devshell }:
 
-    packages.x86_64-linux.hello = nixpkgs.legacyPackages.x86_64-linux.hello;
+    let overlay = final: prev: { };
+    in {
+      inherit overlay;
+    } // flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ devshell.overlay overlay ];
+        };
 
-    defaultPackage.x86_64-linux = self.packages.x86_64-linux.hello;
+        myHaskellEnv = (pkgs.haskellPackages.ghcWithHoogle
+          (p: with p; [ cabal-install ormolu hlint brittany ]));
 
-  };
+      in rec {
+
+        defaultPackage = pkgs.hello;
+      });
 }
