@@ -1,0 +1,27 @@
+library:
+  source-dirs: src
+  ghc-options:
+    - -Wall
+    - -Wno-name-shadowing
+
+dependencies:
+  - base >= 4.7 && < 5
+default-extensions:
+  - OverloadedStrings
+name: weighed-search
+version: 0.1.0.0
+author: Yuan Wang
+license: MIT
+executables:
+  weighed-search-exe:
+    source-dirs: app
+    main: Main.hs
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -O2
+      - -flate-specialise
+      - -fspecialise-aggressively
+    dependencies:
+      - weighed-search

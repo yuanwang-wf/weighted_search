@@ -38,7 +38,7 @@
               value = "${myHaskellEnv}/bin/ghc-pkg";
             }
           ];
-          packages = [ myHaskellEnv pkgs.nixpkgs-fmt ];
+          packages = [ myHaskellEnv pkgs.nixpkgs-fmt pkgs.hpack ];
         };
       });
 }
