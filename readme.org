@@ -1,1 +1,14 @@
-#+TITLE: Readme
+#+TITLE: Code For algebras for weighted search
+
+
+hlint recommends ~:~ over ~[] ++~
+
+#+begin_src haskell
+dfe :: Tree a -> [a]
+dfe Tip = []
+dfe (x :&: xs) = [x] ++ choices dfe xs
+#+end_src
+
+should written as
+
+https://doisinkidney.com/pdfs/algebras-for-weighted-search.pdf

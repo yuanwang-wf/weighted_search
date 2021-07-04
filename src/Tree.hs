@@ -19,5 +19,5 @@ dfe Tip = []
 dfe (x :&: xs) = [x] ++ choices dfe xs
 
 choices :: Alternative f => (a -> f b) -> [a] -> f b
-choices f [] = empty
+choices _ [] = empty
 choices f (x:xs) = f x <|> choices f xs
